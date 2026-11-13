@@ -23,7 +23,7 @@ export default function CorporateWellness() {
       aria-labelledby="corporate-heading"
     >
       <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Left – Image */}
           <div ref={contentRef} className="reveal order-2 lg:order-1">
@@ -38,26 +38,26 @@ export default function CorporateWellness() {
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/30 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Accent block */}
+              {/* Accent block – hidden on small screens to avoid overflow */}
               <div
-                className="absolute -bottom-6 -right-6 w-40 h-32 bg-brand-red/8 rounded-xl -z-10"
+                className="absolute -bottom-4 -right-4 w-36 h-28 bg-brand-red/8 rounded-xl -z-10 hidden md:block"
                 aria-hidden="true"
               />
             </div>
           </div>
 
           {/* Right – Content */}
-          <div ref={headRef} className="reveal order-1 lg:order-2 flex flex-col gap-8">
+          <div ref={headRef} className="reveal order-1 lg:order-2 flex flex-col gap-6">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-8 h-px bg-brand-red" aria-hidden="true" />
                 <span className="eyebrow">For Corporate Organisations</span>
               </div>
-              <h2 id="corporate-heading" className="heading-lg mb-5">
+              <h2 id="corporate-heading" className="heading-lg mb-4">
                 Bring wellness into{' '}
                 <span className="text-brand-red">the workplace.</span>
               </h2>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 <p className="body-lg">
                   Healthier workplaces start with opportunities for people to move
                   more, build healthy routines and take a more active approach to
@@ -71,11 +71,11 @@ export default function CorporateWellness() {
             </div>
 
             {/* Service list */}
-            <ul className="flex flex-col gap-4" role="list">
-              {CORPORATE_SERVICES.map((svc, i) => (
+            <ul className="flex flex-col gap-3" role="list">
+              {CORPORATE_SERVICES.map((svc) => (
                 <li
                   key={svc.id}
-                  className={`reveal reveal-delay-${i + 1} flex items-start gap-4 p-4 rounded-xl bg-brand-offwhite hover:bg-brand-blush/20 transition-colors duration-200`}
+                  className="flex items-start gap-4 p-4 rounded-xl bg-brand-offwhite hover:bg-brand-blush/20 transition-colors duration-200"
                 >
                   <div
                     className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-brand-red flex-shrink-0 shadow-sm"

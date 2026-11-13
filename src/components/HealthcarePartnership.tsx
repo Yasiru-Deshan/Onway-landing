@@ -74,7 +74,7 @@ export default function HealthcarePartnership() {
           {/* Mobile – vertical */}
           <div className="flex flex-col gap-8 lg:hidden">
             {HEALTHCARE_STEPS.map((step, i) => (
-              <div key={step.number} className={`reveal reveal-delay-${i + 1} flex gap-5`}>
+              <div key={step.number} className="flex gap-5">
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-10 h-10 rounded-full bg-brand-red text-white flex items-center justify-center text-xs font-800 flex-shrink-0">
                     {step.number}
