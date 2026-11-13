@@ -6,7 +6,7 @@ export default function FinalCTA() {
 
   return (
     <section
-      className="py-24 md:py-32 bg-brand-navy relative overflow-hidden"
+      className="py-24 md:py-32 bg-[#6494D1] relative overflow-hidden"
       aria-labelledby="final-cta-heading"
     >
       {/* Background accents */}

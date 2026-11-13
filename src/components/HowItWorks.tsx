@@ -7,7 +7,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="section-py bg-brand-navy relative overflow-hidden"
+      className="section-py bg-[#6494D1] relative overflow-hidden"
       aria-labelledby="how-it-works-heading"
     >
       {/* Background accents */}

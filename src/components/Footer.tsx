@@ -9,10 +9,10 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-brand-navy text-white" aria-label="Site footer">
+    <footer className="bg-[#6494D1] text-white" aria-label="Site footer">
       <div className="section-container">
         {/* Top rule */}
-        <div className="border-t border-white/10 pt-16 pb-12">
+        <div className="border-t border-white/20 pt-16 pb-12">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
             {/* Brand */}
@@ -31,25 +31,25 @@ export default function Footer() {
                 />
               </a>
 
-              <p className="text-sm text-white/50 leading-relaxed max-w-xs">
+              <p className="text-sm text-white leading-relaxed max-w-xs">
                 Expert wellness. Wherever it matters.
               </p>
 
               <div className="flex flex-col gap-2 text-sm">
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2"
+                  className="text-white hover:text-white/80 transition-colors inline-flex items-center gap-2"
                   aria-label={`Contact ONWAY by email: ${CONTACT_EMAIL}`}
                 >
                   {CONTACT_EMAIL}
                 </a>
-                <p className="text-white/40">{CONTACT_LOCATION}</p>
+                <p className="text-white">{CONTACT_LOCATION}</p>
               </div>
             </div>
 
             {/* Navigation */}
             <nav aria-label="Footer navigation">
-              <p className="text-xs font-700 uppercase tracking-[0.18em] text-white/40 mb-5">
+              <p className="text-xs font-700 uppercase tracking-[0.18em] text-white mb-5">
                 Navigation
               </p>
               <ul className="flex flex-col gap-3" role="list">
@@ -64,7 +64,7 @@ export default function Footer() {
                     <a
                       href={link.href}
                       onClick={e => { e.preventDefault(); scrollTo(link.href) }}
-                      className="text-sm text-white/60 hover:text-white transition-colors"
+                      className="text-sm text-white hover:text-white/80 transition-colors"
                     >
                       {link.label}
                     </a>
@@ -75,11 +75,11 @@ export default function Footer() {
 
             {/* Get in touch */}
             <div>
-              <p className="text-xs font-700 uppercase tracking-[0.18em] text-white/40 mb-5">
+              <p className="text-xs font-700 uppercase tracking-[0.18em] text-white mb-5">
                 Get In Touch
               </p>
               <div className="flex flex-col gap-4">
-                <p className="text-sm text-white/60 leading-relaxed">
+                <p className="text-sm text-white leading-relaxed">
                   Interested in a wellness partnership? We'd love to hear from you.
                 </p>
                 <a
@@ -96,11 +96,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-white/35">
+        <div className="border-t border-white/20 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-white">
             © {year} ONWAY. All rights reserved.
           </p>
-          <p className="text-xs text-white/25">
+          <p className="text-xs text-white">
             Dubai, UAE · International Partnerships
           </p>
         </div>
