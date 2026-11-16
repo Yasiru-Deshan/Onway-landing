@@ -1,19 +1,7 @@
 import { MapPin, Languages, ArrowRight } from 'lucide-react'
 import { useReveal } from '../hooks/useReveal'
+import coachPhoto from '../assets/images/coach_lizandra_web.jpg'
 
-/**
- * ─────────────────────────────────────────────────────────────────────────────
- * COACH PROFILE – Lizandra Strottmann
- *
- * PLACEHOLDER PHOTO: The coaching professional's authorised photograph has not
- * yet been supplied. The image slot below uses a styled placeholder with her
- * initials. To replace it:
- *   1. Add the authorised photo file to: src/assets/images/coach_lizandra.jpg
- *   2. Import it at the top of this file: import coachPhoto from '../assets/images/coach_lizandra.jpg'
- *   3. Replace the <CoachPhotoPlaceholder /> component with:
- *      <img src={coachPhoto} alt="Lizandra Strottmann – Personal Trainer and Nutrition Coach" className="img-cover" />
- * ─────────────────────────────────────────────────────────────────────────────
- */
 
 export default function CoachProfile() {
   const textRef = useReveal()
@@ -37,11 +25,11 @@ export default function CoachProfile() {
             <div className="relative">
               {/* Photo container */}
               <div className="rounded-2xl overflow-hidden aspect-[3/4] shadow-2xl shadow-brand-navy/15">
-                {/*
-                  PLACEHOLDER: Replace this div with <img> once authorised
-                  photo is available. See instructions above.
-                */}
-                <CoachPhotoPlaceholder />
+                <img
+                  src={coachPhoto}
+                  alt="Lizandra Strottmann – Personal Trainer and Nutrition Coach"
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* Detail card */}
@@ -128,28 +116,3 @@ export default function CoachProfile() {
   )
 }
 
-/**
- * Styled placeholder displayed when no authorised coach photo is available.
- * Replace by following the instructions at the top of this file.
- */
-function CoachPhotoPlaceholder() {
-  return (
-    <div className="w-full h-full bg-gradient-to-br from-brand-navy/90 to-brand-navy flex flex-col items-center justify-center gap-6 relative">
-      {/* Initials circle */}
-      <div className="w-28 h-28 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center">
-        <span className="text-4xl font-800 text-white/80 select-none">LS</span>
-      </div>
-
-      {/* Name block */}
-      <div className="text-center px-6">
-        <p className="text-white font-700 text-lg leading-tight mb-1">Lizandra Strottmann</p>
-        <p className="text-white/60 text-sm font-500">Personal Trainer</p>
-        <p className="text-white/60 text-sm font-500">Sports &amp; Exercise Nutrition Coach</p>
-      </div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-8 right-8 w-16 h-16 rounded-full border border-white/10 pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-16 left-6 w-10 h-10 rounded-full border border-white/10 pointer-events-none" aria-hidden="true" />
-    </div>
-  )
-}
