@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import emailjs from '@emailjs/browser'
 import { CheckCircle2, AlertCircle, Loader2, Mail, MapPin, ArrowRight } from 'lucide-react'
 import { useReveal } from '../hooks/useReveal'
 import {
@@ -9,49 +10,43 @@ import {
 } from '../data/siteContent'
 
 // ─────────────────────────────────────────────────────────────────────────────
-// BACKEND INTEGRATION PLACEHOLDER
-//
-// This form currently runs client-side only. To connect to a backend:
-//   1. Import FORM_API_ENDPOINT from '../data/siteContent'
-//   2. Replace the simulateFormSubmit function below with a real fetch() call:
-//
-//   const response = await fetch(FORM_API_ENDPOINT, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(formData),
-//   })
-//   if (!response.ok) throw new Error('Submission failed')
-//
-// Compatible with: Resend, SendGrid, Formspree, AWS SES, etc.
+// EmailJS integration – credentials are stored in .env (Vite VITE_EMAILJS_* vars)
+// Template variables expected by the EmailJS template:
+//   {{full_name}}, {{work_email}}, {{organisation_name}},
+//   {{organisation_type}}, {{country}}, {{message}}
 // ─────────────────────────────────────────────────────────────────────────────
 
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string
+
 interface FormData {
-  fullName:         string
-  workEmail:        string
+  fullName: string
+  workEmail: string
   organisationName: string
   organisationType: OrganisationType | ''
-  country:          string
-  message:          string
+  country: string
+  message: string
 }
 
 interface FormErrors {
-  fullName?:         string
-  workEmail?:        string
+  fullName?: string
+  workEmail?: string
   organisationName?: string
   organisationType?: string
-  country?:          string
-  message?:          string
+  country?: string
+  message?: string
 }
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
 const INITIAL_FORM: FormData = {
-  fullName:         '',
-  workEmail:        '',
+  fullName: '',
+  workEmail: '',
   organisationName: '',
   organisationType: '',
-  country:          '',
-  message:          '',
+  country: '',
+  message: '',
 }
 
 function validateEmail(email: string) {
@@ -60,18 +55,18 @@ function validateEmail(email: string) {
 
 export default function ContactSection() {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM)
-  const [errors,   setErrors]   = useState<FormErrors>({})
-  const [status,   setStatus]   = useState<FormStatus>('idle')
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [status, setStatus] = useState<FormStatus>('idle')
   const headRef = useReveal()
 
   const validate = (): boolean => {
     const e: FormErrors = {}
-    if (!formData.fullName.trim())          e.fullName         = 'Please enter your full name.'
-    if (!validateEmail(formData.workEmail)) e.workEmail        = 'Please enter a valid work email address.'
-    if (!formData.organisationName.trim())  e.organisationName = 'Please enter your organisation name.'
-    if (!formData.organisationType)         e.organisationType = 'Please select an organisation type.'
-    if (!formData.country.trim())           e.country          = 'Please enter your country.'
-    if (!formData.message.trim())           e.message          = 'Please include a message.'
+    if (!formData.fullName.trim()) e.fullName = 'Please enter your full name.'
+    if (!validateEmail(formData.workEmail)) e.workEmail = 'Please enter a valid work email address.'
+    if (!formData.organisationName.trim()) e.organisationName = 'Please enter your organisation name.'
+    if (!formData.organisationType) e.organisationType = 'Please select an organisation type.'
+    if (!formData.country.trim()) e.country = 'Please enter your country.'
+    if (!formData.message.trim()) e.message = 'Please include a message.'
     setErrors(e)
     return Object.keys(e).length === 0
   }
@@ -86,10 +81,20 @@ export default function ContactSection() {
     }
   }
 
-  const simulateFormSubmit = async (data: FormData): Promise<void> => {
-    // Replace this with a real API call when backend is ready.
-    console.info('[ONWAY] Partnership enquiry (dev mode):', data)
-    return new Promise(resolve => setTimeout(resolve, 1600))
+  const sendEmail = async (data: FormData): Promise<void> => {
+    await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        full_name: data.fullName,
+        work_email: data.workEmail,
+        organisation_name: data.organisationName,
+        organisation_type: data.organisationType,
+        country: data.country,
+        message: data.message,
+      },
+      { publicKey: EMAILJS_PUBLIC_KEY },
+    )
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -98,7 +103,7 @@ export default function ContactSection() {
 
     setStatus('submitting')
     try {
-      await simulateFormSubmit(formData)
+      await sendEmail(formData)
       setStatus('success')
       setFormData(INITIAL_FORM)
     } catch {
